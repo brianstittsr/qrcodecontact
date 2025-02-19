@@ -3,9 +3,13 @@ frontend:
   phases:
     preBuild:
       commands:
+        - npm install -g yarn
+        - node -v
+        - yarn -v
         - yarn install
     build:
       commands:
+        - env | grep -e NODE_ENV -e NEXT_PUBLIC_ >> .env.production
         - yarn run build
   artifacts:
     baseDirectory: .next
@@ -15,3 +19,16 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Strict-Transport-Security'
+          value: 'max-age=31536000; includeSubDomains'
+        - key: 'X-Frame-Options'
+          value: 'SAMEORIGIN'
+        - key: 'X-XSS-Protection'
+          value: '1; mode=block'
+        - key: 'X-Content-Type-Options'
+          value: 'nosniff'
+  buildPath: /
+
