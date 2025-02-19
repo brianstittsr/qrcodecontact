@@ -1,14 +1,14 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/config';
 import { redirect } from 'next/navigation';
-import { neo4j } from 'neo4j-driver';
+import neo4j from 'neo4j-driver';
 import { User } from '@/types/user';
 
 const driver = neo4j.driver(
-  process.env.NEO4J_URI || "neo4j+s://de2a40da.databases.neo4j.io:7687",
+  process.env.NEO4J_URI!,
   neo4j.auth.basic(
-    process.env.NEO4J_USER || "neo4j",
-    process.env.NEO4J_PASSWORD || "uoxoZqnGJf5ed0GLI0BehuNkiZnOEpH4q9_HsEXJDx8"
+    process.env.NEO4J_USER!,
+    process.env.NEO4J_PASSWORD!
   )
 );
 
