@@ -253,12 +253,11 @@ export default function GenerateQRPage() {
             </div>
           </div>
         )}         </div>
-                  ref={canvasRef}
                   className="absolute top-0 left-0 w-full h-full opacity-0"
                 />
               </div>
               <button
-                onClick={handleSave}
+                onClick={handleDownload}
                 className="w-full sm:w-auto py-2 px-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200 flex items-center justify-center gap-2"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
