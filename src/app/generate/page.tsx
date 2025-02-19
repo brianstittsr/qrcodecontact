@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import ImageUpload from '@/components/ImageUpload';
 import { defaultProfileImage, defaultCompanyLogo } from '@/utils/defaultImages';
@@ -104,8 +104,9 @@ export default function GenerateQRPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-8 text-center">Generate QR Contact Card</h1>
+    <>
+      <div className="container mx-auto px-4 py-8 max-w-2xl">
+        <h1 className="text-3xl font-bold mb-8 text-center">Generate QR Contact Card</h1>
       
       <div className="space-y-8">
         <form
@@ -275,6 +276,7 @@ export default function GenerateQRPage() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }
