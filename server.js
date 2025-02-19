@@ -2,20 +2,22 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+const app = next({ dev: false });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    // Increase header size limit
+    // Set production headers
     res.setHeader('Connection', 'keep-alive');
     res.setHeader('Keep-Alive', 'timeout=5, max=1000');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
     
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
-  }).listen(3000, (err) => {
+  }).listen(process.env.PORT || 3000, (err) => {
     if (err) throw err;
-    console.log('> Ready on http://localhost:3000');
+    console.log(`> Ready on port ${process.env.PORT || 3000}`);
   });
 });

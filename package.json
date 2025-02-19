@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "amplify-push": "amplify push",
-    "amplify-publish": "amplify publish"
+    "lint": "next lint"
   },
   "dependencies": {
     "@auth/neo4j-adapter": "^2.7.4",
