@@ -49,8 +49,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       redirect('/profile');
     }
 
-    const userData = result.records[0].get('u').properties as Contact;
-    const isOwner = result.records[0].get('isOwner');
+    const userData = result.records[0]?.get('u')?.properties;
+    const isOwner = result.records[0]?.get('isOwner');
 
     if (!isOwner) {
       redirect('/profile');
@@ -71,7 +71,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                     View Contact Card
                   </Link>
                 </div>
-                <ProfileForm initialData={userData} isOwner={isOwner} uniqueId={params.id} />
+                <ProfileForm initialData={userData} isOwner={isOwner} />
               </div>
             </div>
             <div className="flex justify-center">

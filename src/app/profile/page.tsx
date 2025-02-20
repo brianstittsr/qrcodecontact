@@ -39,7 +39,7 @@ export default async function ProfilePage() {
       { uniqueId: session.user.uniqueId }
     );
 
-    const userData = result.records[0]?.get('u')?.properties as Contact | undefined;
+    const userData = result.records[0]?.get('u')?.properties;
 
     return (
       <div className="min-h-screen bg-gray-50 py-8">
@@ -47,7 +47,7 @@ export default async function ProfilePage() {
           <div className="bg-white shadow-sm rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <h1 className="text-2xl font-semibold text-gray-900 mb-6">Profile Settings</h1>
-              <ProfileForm initialData={userData} />
+              <ProfileForm initialData={userData} isOwner={true} />
             </div>
           </div>
         </div>

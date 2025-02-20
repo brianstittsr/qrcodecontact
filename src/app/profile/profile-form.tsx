@@ -19,9 +19,10 @@ interface ProfileFormProps {
     companyLogo?: string;
     uniqueId?: string;
   };
+  isOwner?: boolean;
 }
 
-export default function ProfileForm({ initialData }: ProfileFormProps) {
+export default function ProfileForm({ initialData, isOwner }: ProfileFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [profileImage, setProfileImage] = useState(initialData?.profileImage || defaultProfileImage);
@@ -48,7 +49,7 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
         companyLogo,
       };
 
-      const response = await fetch('/api/profile/update', {
+      const response = await fetch(isOwner ? '/api/profile/update' : '/api/profile/update-other', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
