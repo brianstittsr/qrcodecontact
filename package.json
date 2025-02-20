@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@auth/neo4j-adapter": "^2.7.4",
-    "@aws-amplify/cli": "^12.14.3",
     "@heroicons/react": "^2.2.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/qrcode": "^1.5.5",
