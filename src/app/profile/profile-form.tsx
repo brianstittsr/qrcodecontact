@@ -7,6 +7,8 @@ import { defaultProfileImage, defaultCompanyLogo } from '@/utils/defaultImages';
 
 interface ProfileFormProps {
   initialData?: {
+    firstName?: string;
+    lastName?: string;
     name?: string;
     email?: string;
     phone?: string;
@@ -24,6 +26,8 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
   const [loading, setLoading] = useState(false);
   const [profileImage, setProfileImage] = useState(initialData?.profileImage || defaultProfileImage);
   const [companyLogo, setCompanyLogo] = useState(initialData?.companyLogo || defaultCompanyLogo);
+  const [firstName, setFirstName] = useState(initialData?.firstName || '');
+  const [lastName, setLastName] = useState(initialData?.lastName || '');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +36,9 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
     try {
       const formData = new FormData(e.currentTarget);
       const data = {
-        name: formData.get('name')?.toString() || '',
+        firstName,
+        lastName,
+        name: `${firstName} ${lastName}`,
         email: formData.get('email')?.toString() || '',
         phone: formData.get('phone')?.toString() || '',
         company: formData.get('company')?.toString() || '',
@@ -70,20 +76,26 @@ export default function ProfileForm({ initialData }: ProfileFormProps) {
       {/* Required Fields Section */}
       <div className="bg-white rounded-lg">
         <div className="grid grid-cols-1 gap-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Full Name *
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              defaultValue={initialData?.name}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          <div className="mb-4">
+            <label className="block text-gray-700">First Name</label>
+            <input 
+              type="text" 
+              name="firstName" 
+              value={firstName} 
+              onChange={(e) => setFirstName(e.target.value)} 
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
             />
           </div>
-
+          <div className="mb-4">
+            <label className="block text-gray-700">Last Name</label>
+            <input 
+              type="text" 
+              name="lastName" 
+              value={lastName} 
+              onChange={(e) => setLastName(e.target.value)} 
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            />
+          </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email *
