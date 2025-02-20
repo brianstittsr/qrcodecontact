@@ -34,7 +34,7 @@ export default async function ProfilePage() {
     const result = await dbSession.run(
       `
       MATCH (u:QRCodeUser {uniqueId: $uniqueId})
-      RETURN u
+      RETURN u.firstName, u.lastName, u
       `,
       { uniqueId: session.user.uniqueId }
     );
