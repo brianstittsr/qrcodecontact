@@ -29,6 +29,7 @@ export default function ProfileForm({ initialData, isOwner }: ProfileFormProps) 
   const [companyLogo, setCompanyLogo] = useState(initialData?.companyLogo || defaultCompanyLogo);
   const [firstName, setFirstName] = useState(initialData?.firstName || '');
   const [lastName, setLastName] = useState(initialData?.lastName || '');
+  const [name, setName] = useState(initialData?.name || '');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,23 +79,41 @@ export default function ProfileForm({ initialData, isOwner }: ProfileFormProps) 
       <div className="bg-white rounded-lg">
         <div className="grid grid-cols-1 gap-6">
           <div className="mb-4">
-            <label className="block text-gray-700">First Name</label>
-            <input 
-              type="text" 
-              name="firstName" 
-              value={firstName} 
-              onChange={(e) => setFirstName(e.target.value)} 
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700">Last Name</label>
-            <input 
-              type="text" 
-              name="lastName" 
-              value={lastName} 
-              onChange={(e) => setLastName(e.target.value)} 
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              Full Name *
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
           <div>
