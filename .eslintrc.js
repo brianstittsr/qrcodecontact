@@ -16,5 +16,5 @@ module.exports = {
     'scripts/**/*',
     '*.config.js',
     '*.config.mjs'
-  ]
+  ],
 };

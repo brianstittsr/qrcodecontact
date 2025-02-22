@@ -3639,7 +3639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9":
+"eslint@npm:^9.21.0":
   version: 9.21.0
   resolution: "eslint@npm:9.21.0"
   dependencies:
@@ -5856,7 +5856,7 @@ __metadata:
     bcryptjs: "npm:^3.0.1"
     browser-image-compression: "npm:^2.0.2"
     dotenv: "npm:^16.4.7"
-    eslint: "npm:^9"
+    eslint: "npm:^9.21.0"
     eslint-config-next: "npm:15.1.7"
     globals: "npm:^15.15.0"
     http: "npm:^0.0.1-security"

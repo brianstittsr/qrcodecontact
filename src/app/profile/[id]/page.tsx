@@ -12,17 +12,6 @@ interface ProfilePageProps {
   };
 }
 
-interface Contact {
-  name: string;
-  email: string;
-  phone?: string;
-  company?: string;
-  title?: string;
-  website?: string;
-  profileImage?: string;
-  companyLogo?: string;
-}
-
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const session = await getServerSession(authOptions);
   

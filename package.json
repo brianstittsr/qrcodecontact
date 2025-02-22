@@ -46,7 +46,7 @@
     "autoprefixer": "10.4.14",
     "babel-loader": "^9.2.1",
     "dotenv": "^16.4.7",
-    "eslint": "^9",
+    "eslint": "^9.21.0",
     "eslint-config-next": "15.1.7",
     "globals": "^15.15.0",
     "http": "^0.0.1-security",

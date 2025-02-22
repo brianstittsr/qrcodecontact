@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as qr from 'qr-image';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getDriver } from '@/lib/neo4j';
@@ -25,7 +24,7 @@ function generateVCard(data: VCardData) {
   if (company) vCard += `ORG:${company}\n`;
   if (title) vCard += `TITLE:${title}\n`;
   if (website) vCard += `URL:${website}\n`;
-  
+
   // Add profile photo if provided
   if (profileImage && profileImage !== 'undefined') {
     vCard += `PHOTO;ENCODING=b;TYPE=JPEG:${profileImage.split(',')[1]}\n`;
@@ -145,8 +144,6 @@ export async function POST(req: NextRequest) {
         if (!result.records[0]?.get('uniqueId')) {
           throw new Error('Failed to get user uniqueId');
         }
-
-        const uniqueId = result.records[0].get('uniqueId');
       } finally {
         await dbSession.close();
         await driver.close();
@@ -161,12 +158,13 @@ export async function POST(req: NextRequest) {
 
     // Generate contact URL
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `https://${req.headers.get('host')}`;
-    const contactUrl = `${baseUrl}/contact/${uniqueId}`;
+    const contactUrl = `${baseUrl}/contact/`;
     console.log('Generated contact URL:', contactUrl);
 
     try {
       // Generate QR code with better options
-      const qrPng = qr.imageSync(contactUrl, {
+      const vCard = generateVCard(data);
+      const qrPng = qr.imageSync(vCard, {
         type: 'png',
         size: 10,  // Module size (pixels per module)
         margin: 2,  // Margin size in modules

@@ -10,17 +10,6 @@ interface ContactPageProps {
   };
 }
 
-interface Contact {
-  name: string;
-  email: string;
-  phone?: string;
-  company?: string;
-  title?: string;
-  website?: string;
-  profileImage?: string;
-  companyLogo?: string;
-}
-
 export default async function ContactPage({ params }: ContactPageProps) {
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
@@ -40,7 +29,16 @@ export default async function ContactPage({ params }: ContactPageProps) {
       notFound();
     }
 
-    const user = result.records[0].get('u').properties as Contact;
+    const user = result.records[0].get('u').properties as {
+      name: string;
+      email: string;
+      phone?: string;
+      company?: string;
+      title?: string;
+      website?: string;
+      profileImage?: string;
+      companyLogo?: string;
+    };
     const isOwner = result.records[0].get('isOwner');
 
     // Generate vCard data
